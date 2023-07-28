@@ -1,7 +1,7 @@
 # Instagram Clone
 
 Project Description: This is an Instagram clone project that replicates some of the core functionalities of the Instagram app. The project is built using React, Redux, and styled-components for CSS. It focuses on practicing Redux for state management and creating custom-styled components using styled-components.
-
+![Capture d’écran 2023-07-28 153236](https://github.com/malakMkh/instagram-clone/assets/123992427/41f1e247-940e-4263-8f7f-ea2f6f589289)
 ## Table of Contents
 
 - [Introduction](#introduction)
