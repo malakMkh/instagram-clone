@@ -1,9 +1,19 @@
 import './App.css';
-import Login from './components/Login';
+// import Footer from './components/Footer';
+// import Stories from './components/Stories';
+// import Login from './components/Login';
+// import Navbar from './components/Navbar';
+// import Profil from './components/Profil';
+// import SideBar from './components/SideBar';
 function App() {
   return (
     <div className="container">
-      <Login />
+      {/* <Login /> */}
+      {/* <Navbar /> */}
+      {/* <Profil /> */}
+      {/* <Footer /> */}
+      {/* <Stories /> */}
+      {/* <SideBar /> */}
     </div>
   );
 }
