@@ -1,6 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-const login = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserInformation } from '../Redux/UserInformation';
+import { useNavigate } from 'react-router-dom';
+const Login = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [userID, setUserID] = useState('');
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const UserInformation = useSelector((store) => store.UserInformations);
+  const ExistedUsers = Object.keys(UserInformation);
+  const CheckLogin = (e) => {
+    e.preventDefault();
+    if (ExistedUsers.indexOf(userID) !== -1) {
+      let warn = document.querySelector('.warning');
+      warn.classList.add('active');
+
+      setTimeout(() => {
+        warn.classList.remove('active');
+      }, 3000);
+
+      return;
+    }
+    navigate('/home');
+    dispatch(getUserInformation([userID, userName, password]));
+  };
+  /* This code uses useEffect to disable a button when any of the values userID, userName, or password is missing or not defined,
+  and re-enables the button as soon as all these values are provided. This could be useful for validating a form or preventing the
+  user from submitting incomplete information. */
+  useEffect(() => {
+    let btn = document.querySelector('button');
+    if (!userID || !userName || !password) {
+      btn.setAttribute('disabled', 'true');
+    } else {
+      btn.removeAttribute('disabled');
+    }
+  }, [userID, userName, password]);
+
   return (
     <Container>
       <Form>
@@ -8,10 +45,22 @@ const login = () => {
           src=" https://www.instagram.com/static/images/web/mobile_nav_type_logo-2x.png/1b47f9d0e595.png"
           alt="logo"
         />
-        <input type="text" placeholder="UserName" />
-        <input type="text" placeholder="UserID" />
-        <input type="password" placeholder="UserPasssword" />
-        <button> Log in</button>
+        <input
+          type="text"
+          placeholder="UserName"
+          onChange={(e) => setUserName(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="UserID"
+          onChange={(e) => setUserID(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="UserPasssword"
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={CheckLogin}> Log in</button>
       </Form>
       <div className="warning">Username already exist</div>
     </Container>
@@ -90,4 +139,4 @@ const Form = styled.form`
     }
   }
 `;
-export default login;
+export default Login;
